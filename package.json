@@ -1,8 +1,12 @@
 {
-	"name": "redis-commander",
-	"displayName": "redis-commander",
-	"description": "redis client within vs code",
-	"version": "0.0.1",
+	"name": "redis-command-runner",
+	"displayName": "Redis Command Runner",
+	"description": "redis client within VS Code",
+	"version": "0.1.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zerosandones/redis-command-runner.git"
+	},
 	"engines": {
 		"vscode": "^1.41.0"
 	},
@@ -53,5 +57,6 @@
 	},
 	"dependencies": {
 		"redis": "^2.8.0"
-	}
+	},
+	"license": "MIT"
 }
