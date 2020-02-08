@@ -1,65 +1,51 @@
-# redis-commander README
+# Redis Command Runner
 
-This is the README for your extension "redis-commander". After writing up a brief description, we recommend including the following sections.
+This extension allows connecting to a redis server and running commands against the server and displaying the results
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### Redis Comand Runner: Connect
 
-For example if there is an image subfolder under your extension project workspace:
+![connect](images/connect.png)
 
-\!\[feature X\]\(images/feature-x.png\)
+Connects to a Redis server. A prompt is displayed to enter the url of the server. the current connection status and server address is displayed in the bottom right hand of the editior window. _Currently the prompt does not allow you to enter user name and password._
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+![connection status](images/connection-status.png)
+
+### Redis Command Runner: Command
+
+![command](images/command.png)
+
+Sends a command to the Redis server and displays the server's output. A propmet ius displayed to enter the command, the whole command is entered into the prompt. Text for a command parameter that includes spaces needs to be enclosed in single or double quotes.
+
+![command prompt](images/command-prompt.png)
+
+![command output](images/command-output.png)
+
+### Redis Command Runner: Disconnect
+
+![disconnect](images/disconnect.png)
+
+Disconnects from the redis server.
+
+![disconnect status](images/disconnect-status.png)
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+Currently the extension does not hve any requirements or dependencies.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Currenty the extension does not create any VS Code settings.
 
-For example:
+## Known Issues and Feature Requests
 
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Issues and feature request can be report via [Github](https://github.com/zerosandones/redis-command-runner/issues).
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+The change log for the extension can be found [here](https://github.com/zerosandones/redis-command-runner/blob/master/CHANGELOG.md)
 
-### 1.0.0
+## License
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+MIT
