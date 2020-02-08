@@ -14,25 +14,25 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.redis-commander.connect"
+		"onCommand:extension.redis-command-runner.connect"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.redis-commander.connect",
+				"command": "extension.redis-command-runner.connect",
 				"title": "Connect",
-				"category": "Redis Commander"
+				"category": "Redis Command Runner"
 			},
 			{
-				"command": "extension.redis-commander.command",
+				"command": "extension.redis-command-runner.command",
 				"title": "Command",
-				"category": "Redis Commander"
+				"category": "Redis Command Runner"
 			},
 			{
-				"command": "extension.redis-commander.disconnect",
+				"command": "extension.redis-command-runner.disconnect",
 				"title": "Disconnect",
-				"category": "Redis Commander"
+				"category": "Redis Command Runner"
 			}
 		]
 	},

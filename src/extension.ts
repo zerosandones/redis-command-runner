@@ -9,11 +9,11 @@ import { MessageHandler } from './message-handler';
 export function activate(context: vscode.ExtensionContext) {
 
 	const messageHandler = new MessageHandler();
-	const redisCommander = new RedisInterface(messageHandler);
+	const redisInterface = new RedisInterface(messageHandler);
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "redis-commander" is now active!');
+	console.log('Congratulations, your extension "redis-command-runner" is now active!');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
@@ -25,11 +25,11 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Hello World!');
 	});*/
 
-	addCommand(context, 'extension.redis-commander.connect', redisCommander.connect);
+	addCommand(context, 'extension.redis-command-runner.connect', redisInterface.connect);
 
-	addCommand(context, 'extension.redis-commander.command', redisCommander.command);
+	addCommand(context, 'extension.redis-command-runner.command', redisInterface.command);
 
-	addCommand(context, 'extension.redis-commander.disconnect', redisCommander.disconnect);
+	addCommand(context, 'extension.redis-command-runner.disconnect', redisInterface.disconnect);
 
 	
 }
