@@ -7,12 +7,17 @@
 		"type": "git",
 		"url": "https://github.com/zerosandones/redis-command-runner.git"
 	},
+	"homepage": "https://github.com/zerosandones/redis-command-runner",
 	"engines": {
 		"vscode": "^1.41.0"
 	},
 	"categories": [
 		"Other"
 	],
+	"icon": "images/redis-512.png",
+	"preview": true,
+	"publisher": "ZerosandOnes",
+	"keywords": ["Redis"],
 	"activationEvents": [
 		"onCommand:extension.redis-command-runner.connect"
 	],

@@ -1,4 +1,4 @@
-# Redis Command Runner
+# ![redis icon](images/redis-128.png) Redis Command Runner
 
 This extension allows connecting to a redis server and running commands against the server and displaying the results
 
