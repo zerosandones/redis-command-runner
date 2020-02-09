@@ -8,7 +8,7 @@ This extension allows connecting to a redis server and running commands against 
 
 ![connect](images/connect.png)
 
-Connects to a Redis server. A prompt is displayed to enter the url of the server. the current connection status and server address is displayed in the bottom right hand of the editior window. _Currently the prompt does not allow you to enter user name and password._
+Connects to a Redis server. A prompt is displayed to enter the url of the server, then a prompt is displayed to allow a password to be entered, if a password is not required you can just press the enter key. The current connection status and server address is displayed in the bottom right hand of the editior window.
 
 ![connection status](images/connection-status.png)
 
