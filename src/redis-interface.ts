@@ -16,27 +16,47 @@ export class RedisInterface {
 
     public connect = () => {
         console.log('connect');
-        this.input("Redis URL", "eg. redis://localhost:6379")
-        .then(url => {
-            if (url) {
-                this.connectionClientOptions.url = url;
-                this.connectionClientOptions.retry_strategy = this.retryStrategy;
-                this.client = createClient(this.connectionClientOptions);
-                this.client.on("connect", () => {
-                    this.messageHandler.displayStatusBarMessage(`$(database) Redis > ${url}`);
-                });
-                this.client.on("end", () => {
-                    this.messageHandler.displayStatusBarMessage(`$(database) Redis > disconnected`);
-                });
+        let serverAddress: string;
+        let password: string;
 
-                this.client.on("error", (error: RedisError) => {
-                    console.error("recevied error messge ", error);
-                    this.messageHandler.displayErrorMessage(error.message);
+        this.input("Redis URL", "eg. redis://localhost:6379")
+        .then((url: string) => {
+            if (url) {
+                serverAddress = url;
+                this.secretInput("Password", "Press enter for none")
+                .then((passwordInput: string) => {
+                    if (passwordInput) {
+                        console.log('password present');
+                        password = passwordInput;
+                    }
+                    this.makeConnection(serverAddress, password);
                 });
-                
             }
         });
         
+    }
+
+    private makeConnection = (serverAddress: string, password: string) => {
+        console.log(`connecting to ${serverAddress}`);
+        this.connectionClientOptions.url = serverAddress;
+        if (password) {
+            console.log(`password present`);
+            this.connectionClientOptions.password = password;
+        }
+        this.connectionClientOptions.retry_strategy = this.retryStrategy;
+        this.client = createClient(this.connectionClientOptions);
+
+        this.client.on("connect", () => {
+            this.messageHandler.displayStatusBarMessage(`$(database) Redis > ${serverAddress}`);
+        });
+        this.client.on("end", () => {
+            this.messageHandler.displayStatusBarMessage(`$(database) Redis > disconnected`);
+        });
+
+        this.client.on("error", (error: RedisError) => {
+            console.error("recevied error messge ", error);
+            this.messageHandler.displayErrorMessage(error.message);
+        });
     }
 
     public command = () => {
@@ -71,6 +91,12 @@ export class RedisInterface {
     private input = (prompt: string, placeholder: string): Promise<string> => {
         return new Promise((resolve, reject) => 
             vscode.window.showInputBox({prompt: prompt, placeHolder: placeholder})
+            .then((input) => input ? resolve(input) : resolve()));
+    }
+
+    private secretInput = (prompt: string, placeholder: string): Promise<string> => {
+        return new Promise((resolve, reject) => 
+            vscode.window.showInputBox({prompt: prompt, placeHolder: placeholder, password: true})
             .then((input) => input ? resolve(input) : resolve()));
     }
 

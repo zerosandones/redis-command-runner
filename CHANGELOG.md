@@ -7,10 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- add ability to enter password when connecting to server
+
 ## [0.1.0] - 2020-02-08
 
 ### Added
 
-- create connection to redis server (does not accept username passwords)
+- create connection to redis server (does not accept passwords)
 - run command on connected redis server
 - disconnect from redis server
