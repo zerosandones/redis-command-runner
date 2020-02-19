@@ -2,10 +2,6 @@ import * as vscode from 'vscode';
 
 export class MessageHandler {
 
-    /*exports.info = (message) => vscode.window.showInformationMessage(message);
-exports.warn = (message) => vscode.window.showWarningMessage(message);
-exports.error = (error) => vscode.window.showErrorMessage(error);=-*/
-
     private statusBarMessage: vscode.StatusBarItem;
     private output: vscode.OutputChannel;
 
