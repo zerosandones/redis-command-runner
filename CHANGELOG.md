@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - add ability to enter password when connecting to server
+- save server address url in user settings on connection
+- display server addesses on the connect command drop down
 
 ## [0.1.0] - 2020-02-08
 
