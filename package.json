@@ -17,7 +17,9 @@
 	"icon": "images/redis-512.png",
 	"preview": true,
 	"publisher": "ZerosandOnes",
-	"keywords": ["Redis"],
+	"keywords": [
+		"Redis"
+	],
 	"activationEvents": [
 		"onCommand:extension.redis-command-runner.connect"
 	],
@@ -39,7 +41,16 @@
 				"title": "Disconnect",
 				"category": "Redis Command Runner"
 			}
-		]
+		],
+		"configuration": {
+			"title": "Redis Command Runner",
+			"properties": {
+				"redis-command-runner.server-urls": {
+					"type": "array",
+					"description": "server addresses to be displayed in the connect command drop down list"
+				}
+			}
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",

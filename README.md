@@ -8,7 +8,7 @@ This extension allows connecting to a redis server and running commands against 
 
 ![connect](images/connect.png)
 
-Connects to a Redis server. A prompt is displayed to enter the url of the server, then a prompt is displayed to allow a password to be entered, if a password is not required you can just press the enter key. The current connection status and server address is displayed in the bottom right hand of the editior window.
+Connects to a Redis server. The first time you connect to a server using this extension an input is displayed to enter the url of the server, then a prompt is displayed to allow a password to be entered, (if a password is not required you can just press the enter key). After you have connected to a server the addessess will be displayed in a quick pick when using the connect command in the future, this quickpick list currently holds 5 different server urls. The current connection status and server address is displayed in the bottom right hand of the editor window.
 
 ![connection status](images/connection-status.png)
 
@@ -36,7 +36,9 @@ Currently the extension does not hve any requirements or dependencies.
 
 ## Extension Settings
 
-Currenty the extension does not create any VS Code settings.
+This extension provides some settings under the title 'Redis Command Runner' in the 'settings.json' file
+
+server-urls: a string array listing the server addesses to display in the quick pick list when using the connect command
 
 ## Known Issues and Feature Requests
 
