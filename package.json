@@ -2,7 +2,7 @@
 	"name": "redis-command-runner",
 	"displayName": "Redis Command Runner",
 	"description": "redis client within VS Code",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/zerosandones/redis-command-runner.git"
