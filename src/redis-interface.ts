@@ -26,9 +26,9 @@ export class RedisInterface {
         const urls = this.extensionSettings.quickPickUrls;
         let serverUrlPromise: Promise<string>;
         if (urls.length === 0) {
-            serverUrlPromise = this.promptForServerURL();
+            serverUrlPromise = this.promptForInput('Redis Server Url', 'redis://localhost:6379');
         } else {
-            serverUrlPromise = this.selectServerURL(urls);
+            serverUrlPromise = this.selectOption('Redis Command', 'LRANGE list 0 -1', urls);
         }
 
         serverUrlPromise.then((url: string) => {
@@ -49,14 +49,27 @@ export class RedisInterface {
 
     public command = () => {
         console.log('command');
-        window.showInputBox({prompt: 'Redis Command', placeHolder: 'LRANGE list 0 -1'}).then(commandString => {
+
+        const commands = this.extensionSettings.quickPickCommands;
+        let commandPromise: Promise<string>;
+        if (commands.length === 0) {
+            commandPromise = this.promptForInput('Redis Command', 'LRANGE list 0 -1');
+        } else {
+            commandPromise = this.selectOption('Redis Command', 'LRANGE list 0 -1 ', commands);
+        }
+
+        commandPromise.then((commandString: string) => {
             if (commandString) {
                 const command = commandString.substring(0, commandString.indexOf(' '));
                 const commandArguments = commandString.substring(commandString.indexOf(' ') + 1).match(/[^"' ]+|(['"][^'"]*["'])/g);
                 console.log(`command ${command}, arguments ${commandArguments}`);
                 this.client.sendCommand(command, commandArguments as [], (err, message) => {
                     this.messageHandler.displayReply(commandString, err, message);
+                    if (!err) {
+                        this.extensionSettings.addCommand(commandString);
+                    }
                 });
+            
             }
         });
     }
@@ -108,20 +121,19 @@ export class RedisInterface {
         return new Error(options.error.message);
     }
 
-
-    private promptForServerURL(): Promise<string> {
-        const options = {prompt: "Redis server address", placeHolder: "redis://localhost:6379"};
+    private promptForInput(prompt: string, placeHolder: string): Promise<string> {
+        const options = {prompt: prompt, placeHolder: placeHolder};
         return new Promise((resolve, reject) => window.showInputBox(options)
             .then((input) => input ? resolve(input) : resolve()));
     }
 
-    private async selectServerURL(serverAddresses: QuickPickItem[]): Promise<string> {
+    private selectOption(title: string, placeHolder: string, options: QuickPickItem[]): Promise<string> {
 
         const output = new Promise<string>((resolve, reject) => {
             const quickPick =  window.createQuickPick<QuickPickItem>();
-            quickPick.items = serverAddresses;
-            quickPick.title = 'Redis server address';
-            quickPick.placeholder = 'redis://localhost:6379';
+            quickPick.items = options;
+            quickPick.title = title;
+            quickPick.placeholder = placeHolder;
 
             quickPick.onDidAccept(() => {
                 console.log(`quickPick onDidAccept ${quickPick.value}, selectedItems = ${quickPick.selectedItems.length}`);
@@ -134,6 +146,7 @@ export class RedisInterface {
             });
 
             quickPick.show();
+            
         });
         return output;
     }

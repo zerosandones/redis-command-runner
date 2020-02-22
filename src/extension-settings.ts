@@ -1,39 +1,48 @@
-import { QuickPickItem, workspace, ConfigurationTarget } from "vscode";
+import { QuickPickItem, workspace, ConfigurationTarget, WorkspaceConfiguration } from "vscode";
 
 export class ExtensionSettings {
 
-    private _connectionUrls: string[] = [];
-
-    constructor() {
-        const config = workspace.getConfiguration("redis-command-runner");
-        this._connectionUrls = config.get<string[]>('server-urls', []);
-    }
-
-    public get connectionUrls(): string[] {
-        return this._connectionUrls;
-    }
-
     public get quickPickUrls(): QuickPickItem[] {
-        return this.connectionUrls.map(label => ({label}));
+        return workspace.getConfiguration("redis-command-runner").get<string[]>('server-urls', []).map(label => ({label}));
+    }
+
+    public get quickPickCommands(): QuickPickItem[] {
+        return workspace.getConfiguration("redis-command-runner").get<string[]>('commands', []).map(label => ({label}));
     }
 
     public addConnectionUrl(url: string): void {
-        if (this._connectionUrls.includes(url)) {
-            this._connectionUrls.splice(this._connectionUrls.indexOf(url), 1);
+        let connectionUrls = workspace.getConfiguration("redis-command-runner").get<string[]>('server-urls', []);
+        if (connectionUrls.includes(url)) {
+            connectionUrls.splice(connectionUrls.indexOf(url), 1);
         }
-        this._connectionUrls.unshift(url);
-        if (this.connectionUrls.length > 5) {
-            this.connectionUrls.slice(0, 4);
+        connectionUrls.unshift(url);
+        if (connectionUrls.length > 5) {
+            connectionUrls = connectionUrls.slice(0, 5);
         }
-        this.saveConnectionURls(this._connectionUrls);
+        this.saveSettings('server-urls', connectionUrls);
     }
 
-    private saveConnectionURls(connectionURLs: string[]) {
-        console.log('saving settings');
-        const config = workspace.getConfiguration("redis-command-runner");
-        config.update('server-urls', connectionURLs, ConfigurationTarget.Global).then(() => {
-            console.log('settings updated');
-        });
+    public addCommand(command: string): void {
+        let commands = workspace.getConfiguration("redis-command-runner").get<string[]>('commands', []);
+        if (commands.includes(command)) {
+            commands.splice(commands.indexOf(command), 1);
+        }
+        commands.unshift(command);
+        if (commands.length > 10) {
+            commands = commands.slice(0, 10);
+        }
+        this.saveSettings('commands', commands);
+    }
+
+    private saveSettings(settingName: string, settingArray: string[]) {
+        workspace.getConfiguration("redis-command-runner").update(settingName, settingArray, ConfigurationTarget.Global).then(
+            () => {
+                console.log(`settings updated ${settingName}`);
+            },
+            (reason: any) => {
+                console.error(`error saving settings ${reason}`);
+            }
+        );
     }
 }
 
