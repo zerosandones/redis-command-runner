@@ -16,7 +16,7 @@ Connects to a Redis server. The first time you connect to a server using this ex
 
 ![command](images/command.png)
 
-Sends a command to the Redis server and displays the server's output. A propmet ius displayed to enter the command, the whole command is entered into the prompt. Text for a command parameter that includes spaces needs to be enclosed in single or double quotes.
+Sends a command to the Redis server and displays the server's output. A prompt is displayed to enter the command, the whole command is entered into the prompt. Text for a command parameter that includes spaces needs to be enclosed in single or double quotes. the command input field also displays the last 10 quique commands sent to a redis server.
 
 ![command prompt](images/command-prompt.png)
 
@@ -36,9 +36,11 @@ Currently the extension does not hve any requirements or dependencies.
 
 ## Extension Settings
 
-This extension provides some settings under the title 'Redis Command Runner' in the 'settings.json' file
+This extension provides some settings under the title 'Redis Command Runner' in the 'settings.json' file.
 
-server-urls: a string array listing the server addesses to display in the quick pick list when using the connect command
+server-urls: a string array listing the server addesses to display in the quick pick list when using the connect command, maximum 5.
+
+commands: a string array listing previous commands that have been sent to a redis server successfully, maximum 10.
 
 ## Known Issues and Feature Requests
 

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- save command string in user settings on successful comand running
+- display saved commands on the input prompt drop down, maximum 10
+
 ## [0.2.0] 2020-02-21
 
 ### Added

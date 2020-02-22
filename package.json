@@ -48,6 +48,10 @@
 				"redis-command-runner.server-urls": {
 					"type": "array",
 					"description": "server addresses to be displayed in the connect command drop down list"
+				},
+				"redis-command-runner.commands": {
+					"type": "array",
+					"description": "commands to be displayed in the command drop down list"
 				}
 			}
 		}
