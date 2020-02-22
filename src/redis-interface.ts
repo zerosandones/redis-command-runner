@@ -28,7 +28,7 @@ export class RedisInterface {
         if (urls.length === 0) {
             serverUrlPromise = this.promptForInput('Redis Server Url', 'redis://localhost:6379');
         } else {
-            serverUrlPromise = this.selectOption('Redis Command', 'LRANGE list 0 -1', urls);
+            serverUrlPromise = this.selectOption('Redis Server Url', 'redis://localhost:6379', urls);
         }
 
         serverUrlPromise.then((url: string) => {
