@@ -2,12 +2,14 @@ import { QuickPickItem, workspace, ConfigurationTarget, WorkspaceConfiguration }
 
 export class ExtensionSettings {
 
+    private _commands: string[] = [];
+
     public get quickPickUrls(): QuickPickItem[] {
         return workspace.getConfiguration("redis-command-runner").get<string[]>('server-urls', []).map(label => ({label}));
     }
 
     public get quickPickCommands(): QuickPickItem[] {
-        return workspace.getConfiguration("redis-command-runner").get<string[]>('commands', []).map(label => ({label}));
+        return this._commands.map(label => ({label}));
     }
 
     public addConnectionUrl(url: string): void {
@@ -23,15 +25,14 @@ export class ExtensionSettings {
     }
 
     public addCommand(command: string): void {
-        let commands = workspace.getConfiguration("redis-command-runner").get<string[]>('commands', []);
-        if (commands.includes(command)) {
-            commands.splice(commands.indexOf(command), 1);
+
+        if (this._commands.includes(command)) {
+            this._commands.splice(this._commands.indexOf(command), 1);
         }
-        commands.unshift(command);
-        if (commands.length > 15) {
-            commands = commands.slice(0, 15);
+        this._commands.unshift(command);
+        if (this._commands.length > 15) {
+            this._commands = this._commands.slice(0, 15);
         }
-        // this.saveSettings('commands', commands);
     }
 
     private saveSettings(settingName: string, settingArray: string[]) {

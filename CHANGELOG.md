@@ -9,8 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- save command string in user settings on successful comand running
-- display saved commands on the input prompt drop down, maximum 10
+- display recently used commands on the command input prompt drop down, maximum 15.
 
 ## [0.2.0] 2020-02-21
 
