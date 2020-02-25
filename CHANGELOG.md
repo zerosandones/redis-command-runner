@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - display recently used commands on the command input prompt drop down, maximum 15.
 
+### Fixed
+
+- fixed display of non string values
+
 ## [0.2.0] 2020-02-21
 
 ### Added
