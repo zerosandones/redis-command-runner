@@ -28,10 +28,10 @@ export class ExtensionSettings {
             commands.splice(commands.indexOf(command), 1);
         }
         commands.unshift(command);
-        if (commands.length > 10) {
-            commands = commands.slice(0, 10);
+        if (commands.length > 15) {
+            commands = commands.slice(0, 15);
         }
-        this.saveSettings('commands', commands);
+        // this.saveSettings('commands', commands);
     }
 
     private saveSettings(settingName: string, settingArray: string[]) {
