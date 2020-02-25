@@ -28,7 +28,7 @@ export class MessageHandler {
         } else {
             console.log('output type = ' + typeof message);
             if (typeof message === "object") {
-                this.output.appendLine(JSON.stringify(message));
+                this.output.appendLine(JSON.stringify(message, null, '\t'));
             } else {
                 this.output.appendLine(`${message}`);
             }
