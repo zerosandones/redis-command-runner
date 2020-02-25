@@ -1,4 +1,4 @@
-import { window, QuickPickItem } from 'vscode';
+import { window, QuickPickItem, CallHierarchyItem } from 'vscode';
 import { RedisClient, createClient, RedisError, ClientOpts, RetryStrategyOptions } from 'redis';
 
 import { MessageHandler } from './message-handler';
@@ -62,8 +62,18 @@ export class RedisInterface {
             if (commandString) {
                 const command = commandString.substring(0, commandString.indexOf(' '));
                 const commandArguments = commandString.substring(commandString.indexOf(' ') + 1).match(/[^"' ]+|(['"][^'"]*["'])/g);
-                console.log(`command ${command}, arguments ${commandArguments}`);
-                this.client.sendCommand(command, commandArguments as [], (err, message) => {
+                const commandArgsNoQuotes = commandArguments?.map(item => {
+                    if (item.startsWith('"') || item.startsWith("'")) {
+                        item = item.substring(1);
+
+                        if (item.endsWith('"') || item.endsWith("'")) {
+                            item = item.substring(0, item.length - 1);
+                        }
+                    }
+                    return item;
+                });
+                console.log(`command ${command}, arguments ${commandArgsNoQuotes}`);
+                this.client.sendCommand(command, commandArgsNoQuotes as [], (err, message) => {
                     this.messageHandler.displayReply(commandString, err, message);
                     if (!err) {
                         this.extensionSettings.addCommand(commandString);
