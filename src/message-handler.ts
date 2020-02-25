@@ -20,12 +20,19 @@ export class MessageHandler {
 
     public displayReply = (command: String, error: Error | null, message: any) => {
 
+        console.log('command out put', message);
         this.output.appendLine('');
         this.output.appendLine(`${command}`);
         if (error) {
             this.output.appendLine(`${error}`);
         } else {
-            this.output.appendLine(`${message}`);
+            console.log('output type = ' + typeof message);
+            if (typeof message === "object") {
+                this.output.appendLine(JSON.stringify(message));
+            } else {
+                this.output.appendLine(`${message}`);
+            }
+            
         }
         
         this.output.show();
@@ -42,6 +49,5 @@ export class MessageHandler {
     public displayErrorMessage = (message: string) => {
         vscode.window.showErrorMessage(message);
     }
-
 
 }
