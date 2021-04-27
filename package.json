@@ -76,7 +76,7 @@
 		"vscode-test": "^1.2.2"
 	},
 	"dependencies": {
-		"redis": "^2.8.0"
+		"redis": "^3.1.1"
 	},
 	"license": "MIT"
 }
